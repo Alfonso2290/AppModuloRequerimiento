@@ -271,6 +271,22 @@
                 
             }
             
+            function soloNumeros(evt)
+            {
+                if (window.event) 
+                {
+                    keynum = evt.keyCode;
+             
+                } else 
+                {
+                    keynum = evt.which;
+                }
+                if ((keynum == 8) || (keynum > 47 && keynum<58))
+                    return true;
+                else
+                    return false;  
+            }
+            
             function eliminarProducto()
             {
                 var sel=seleccion();
@@ -499,7 +515,7 @@
                 %>
                 xmlhtpp+="<center>"; 
                 xmlhtpp+="TOTAL:S/.<%=it%>";
-                xmlhtpp+="<button type='button' onclick='enviarCotizacion()'>";
+                xmlhtpp+="<button type='button' onclick='enviarCotizacion(<%=it%>)'>";
                     xmlhtpp+="Enviar Cotización";
                 xmlhtpp+="</button>";
                 xmlhtpp+="</center>"; 
@@ -554,12 +570,19 @@
                 document.form.submit();
             }
             
-            function enviarCotizacion()
+            function enviarCotizacion(importeTotal)
             {
-                document.form.action="<%=request.getContextPath()%>/RequerimientoServlet";
-                document.form.method="GET";
-                document.form.op.value="15";
-                document.form.submit();
+                if(importeTotal==0){
+                
+                    alert("Ud. debe seleccionar los productos cotizados");
+                
+                }else{
+                    
+                    document.form.action="<%=request.getContextPath()%>/RequerimientoServlet";
+                    document.form.method="GET";
+                    document.form.op.value="15";
+                    document.form.submit();
+                }
             }
             
         </script>
@@ -1015,13 +1038,13 @@
                             <%
                                 }else if(request.getAttribute("ruc")!=null){
                             %>
-                                <input type="text" name="txtRuc" value="<%=ruc%>">
+                            <input type="text" name="txtRuc" value="<%=ruc%>" onkeypress="return soloNumeros(event)" maxlength="11">
                                 
                             <%
                                 }else{
                             %>
                             
-                            <input type="text" name="txtRuc">
+                            <input type="text" name="txtRuc" onkeypress="return soloNumeros(event)" maxlength="11">
                             <%
                                 }
                             %>
@@ -1173,7 +1196,7 @@
                             <%if(request.getAttribute("listaproveedor")!=null){
                                 if(request.getAttribute("objetoProv")!=null){
                             %>
-                            <input name="txtEmail" type="text" value="<%=objProv.getEmail()%>" disabled>
+                            <input name="txtEmail" type="email" value="<%=objProv.getEmail()%>" disabled>
                             <%
                                 }else{
                             %>
@@ -1246,11 +1269,11 @@
                             <%
                                 }else if(request.getAttribute("tel")!=null){
                             %>
-                            <input type="tel" name="txtTel" value="<%=tel%>">
+                            <input type="tel" name="txtTel" value="<%=tel%>" onkeypress="return soloNumeros(event)">
                             <%
                                 }else{
                             %>
-                            <input type="tel" name="txtTel">
+                            <input type="tel" name="txtTel" onkeypress="return soloNumeros(event)">
                             <%
                                 }
                             %> 
@@ -1273,11 +1296,11 @@
                             <%
                                 }else if(request.getAttribute("nume")!=null){
                             %>
-                            <input type="text" name="txtNumExt" value="<%=nume%>">
+                            <input type="text" name="txtNumExt" value="<%=nume%>" onkeypress="return soloNumeros(event)">
                             <%
                                 }else{
                             %>
-                            <input type="text" name="txtNumExt">
+                            <input type="text" name="txtNumExt" onkeypress="return soloNumeros(event)">
                             <%
                                 }
                             %> 
@@ -1305,12 +1328,12 @@
                             <%
                                 }else if(request.getAttribute("numi")!=null){
                             %>
-                            <input type="text" name="txtNumInt" value="<%=numi%>" >
+                            <input type="text" name="txtNumInt" value="<%=numi%>" onkeypress="return soloNumeros(event)">
                             
                             <%
                                 }else{
                             %>
-                            <input type="text" name="txtNumInt">
+                            <input type="text" name="txtNumInt" onkeypress="return soloNumeros(event)">
                             <%
                                 }
                             %> 

@@ -1894,6 +1894,13 @@ public class RequerimientoServlet extends HttpServlet
                 String est=request.getParameter("est");
                 request.setAttribute("est", est);
                 
+                ////////////
+                ProveedorDAO provDAO=new ProveedorDAO();
+                ProveedorBEAN prov=null;
+                prov=provDAO.listarRegistroProveedor(codprov);
+                if(prov!=null)
+                    request.setAttribute("objetoProv", prov);
+                ///////////////
                 
                 pagina="/GestionCotizacion/frmModificarCotizacion.jsp";
                 break;
@@ -2769,9 +2776,14 @@ public class RequerimientoServlet extends HttpServlet
                 cot.setCodCotizacion(codcot);
                 cot.setEstado(estado);
                 CotizacionDAO cotDAO=new CotizacionDAO();
-                cotDAO.actualizarEstado(cot);
                 
+                String estadoActual=cotDAO.getEstado(codcot);
+                double importeTotal=cotDAO.getImporteTotal(codcot);
                 
+                if(!(estadoActual.equalsIgnoreCase("Borrador") && importeTotal==0)){
+                    cotDAO.actualizarEstado(cot);
+                }
+ 
                 CotizacionDAO reqDAO=new CotizacionDAO();
                 ArrayList<CotizacionBEAN> listacot=null; 
                 listacot=reqDAO.listarCotizacion();

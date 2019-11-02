@@ -78,6 +78,22 @@
                 document.form.op.value="23";
                 document.form.submit();
             }
+            
+            function soloNumeros(evt)
+            {
+                if (window.event) 
+                {
+                    keynum = evt.keyCode;
+             
+                } else 
+                {
+                    keynum = evt.which;
+                }
+                if ((keynum == 8) || (keynum > 47 && keynum<58))
+                    return true;
+                else
+                    return false;  
+            }
 
             function modificar()
             {
@@ -111,6 +127,7 @@
                     document.form.txtNom.disabled=false;
                     document.form.submit();
                 }
+              
             }
         </script>
         
@@ -224,11 +241,11 @@
                                    
                             %>
                             
-                            <input type="text" name="txtCantidad" value="<%=objProd.getCantidad()%>">
+                            <input type="text" name="txtCantidad" value="<%=objProd.getCantidad()%>" onkeypress="return soloNumeros(event)">
                             <%
                                 }else{
                             %>
-                            <input type="text" name="txtCantidad">
+                            <input type="text" name="txtCantidad" onkeypress="return soloNumeros(event)">
                             <%
                                 }
                             %>
@@ -242,11 +259,11 @@
                                    
                             %>
                             
-                            <input type="text" name="txtPrecio" value="<%=objProd.getPrecioUnitario()%>">
+                            <input type="text" name="txtPrecio" value="<%=objProd.getPrecioUnitario()%>" onkeypress="return soloNumeros(event)">
                             <%
                                 }else{
                             %>
-                            <input type="text" name="txtPrecio">
+                            <input type="text" name="txtPrecio" onkeypress="return soloNumeros(event)">
                             <%
                                 }
                             %>

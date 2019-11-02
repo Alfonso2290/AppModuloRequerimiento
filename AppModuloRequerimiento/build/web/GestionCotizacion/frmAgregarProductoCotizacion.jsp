@@ -81,6 +81,22 @@
                 document.form.txtNom.focus();
             }
             
+            function soloNumeros(evt)
+            {
+                if (window.event) 
+                {
+                    keynum = evt.keyCode;
+             
+                } else 
+                {
+                    keynum = evt.which;
+                }
+                if ((keynum == 8) || (keynum > 47 && keynum<58))
+                    return true;
+                else
+                    return false;  
+            }
+            
             function retornar()
             {
                 document.form.action="<%=request.getContextPath()%>/RequerimientoServlet";
@@ -368,11 +384,11 @@
                                    
                             %>
                             
-                            <input type="text" name="txtCantidad" value="<%=cant%>">
+                            <input type="text" name="txtCantidad" value="<%=cant%>" onkeypress="return soloNumeros(event)">
                             <%
                                 }else{
                             %>
-                            <input type="text" name="txtCantidad">
+                            <input type="text" name="txtCantidad" onkeypress="return soloNumeros(event)">
                             <%
                                 }
                             %>
@@ -386,11 +402,11 @@
                                    
                             %>
                             
-                            <input type="text" name="txtPrecio" value="<%=pre%>">
+                            <input type="text" name="txtPrecio" value="<%=pre%>" onkeypress="return soloNumeros(event)">
                             <%
                                 }else{
                             %>
-                            <input type="text" name="txtPrecio">
+                            <input type="text" name="txtPrecio" onkeypress="return soloNumeros(event)">
                             <%
                                 }
                             %>

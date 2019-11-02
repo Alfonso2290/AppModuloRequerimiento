@@ -251,5 +251,49 @@ public class CotizacionDAO
         return i;
     }
     
+    public String getEstado(String codigo){
+        String estado="";
+        
+        try 
+        {
+            conexion=new ConexionBD();
+            sql="SELECT ESTADO FROM COTIZACION WHERE COD_COTIZACION=? ";
+            instruccion=conexion.getConexionBD().prepareStatement(sql);
+            instruccion.setString(1,codigo);
+            tabla=instruccion.executeQuery();
+            
+            if(tabla.next()){
+                
+                estado=tabla.getString(1);
+            }
+            
+        } 
+        catch (Exception e) {}
+        
+        return estado;
+    }
+    
+    public double getImporteTotal(String codigo){
+        double importe=0;
+        
+        try 
+        {
+            conexion=new ConexionBD();
+            sql="SELECT IMPORTE_TOTAL FROM COTIZACION WHERE COD_COTIZACION=? ";
+            instruccion=conexion.getConexionBD().prepareStatement(sql);
+            instruccion.setString(1,codigo);
+            tabla=instruccion.executeQuery();
+            
+            if(tabla.next()){
+                
+                importe=tabla.getDouble(1);
+            }
+            
+        } 
+        catch (Exception e) {}
+        
+        return importe;
+    }
+    
     
 }

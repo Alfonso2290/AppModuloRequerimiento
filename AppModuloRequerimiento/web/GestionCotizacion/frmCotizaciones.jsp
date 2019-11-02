@@ -1,8 +1,10 @@
+<%@page import="DAO.CotizacionDAO"%>
 <%@page import="BEAN.CotizacionBEAN"%>
 <%@page import="java.util.ArrayList"%>
 <%
     ArrayList<CotizacionBEAN> lista;
     int cont=0;
+
 %>
 <%
     lista=(ArrayList<CotizacionBEAN>)request.getAttribute("listacotizacion");
@@ -68,6 +70,8 @@
                 }
                 else
                 {
+                    if(estado=="Enviado")
+                        alert("Para cambiar el estado de la cotización a enviado es necesario que se haya culminado el proceso de registro de cotizacion. De no ser así el estado no se modificará");
                     document.form.action="<%=request.getContextPath()%>/RequerimientoServlet";
                     document.form.method="POST";
                     document.form.op.value="44";
