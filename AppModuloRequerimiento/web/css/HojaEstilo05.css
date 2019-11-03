@@ -1,0 +1,78 @@
+.DivPrincipal6
+{
+    height: 700px;margin-top: 50px;border-radius: 10px; border: #5F5F5F 1px solid;width: 40%; 
+    background-color: #6495ED;
+}
+
+.TablaPrincipal4
+{
+    height: 700px;width: 100%;border-radius: 5px; border: #5F5F5F 1px solid;
+}
+
+.TablaPrincipalActualizarInfo
+{
+    height: 500px;width: 90%;
+}
+
+.DivPrincipalActualizarInfo
+{
+    height: 650px;margin-top: 150px; width: 40%; 
+    margin-left: -120px;
+}
+
+.botonActualizarInfo
+{
+    background-color:#5f5fff;text-align: center;width: 120px;color:white;border-radius: 5px; 
+    border:none;height: 35px;font-size: 12pt;margin-left: 50px;
+}
+
+
+.TablaBotonesActualizarInfo
+{
+    width: 100%;
+}
+
+.DivMensajeConfirmarActualizarInfo
+{
+    background-color: white;width:30%;margin-left: -120px;
+}
+
+.DivMensajeConfirmarActualizarInfo2
+{
+    background-color: white;width:30%;margin-left: -80px;
+}
+
+.DivPrincipalActualizarInfo2
+{
+    height: 650px;margin-top: 150px;border-radius: 10px; border: #5F5F5F 1px solid;width: 40%; 
+    background-color: #6495ED;margin-left: -80px;
+}
+
+
+.TablaPrincipalPerfil
+{
+    height: 400px;width: 90%;
+}
+
+.CabeceraTablaPerfil
+{
+    text-align: center;color:white;font-size: 20pt;height: 70px;
+}
+
+.DivPrincipalPerfil
+{
+    height: 620px;margin-top: 150px;width: 40%; 
+    margin-left: -80px;
+}
+
+.botonNuevo
+{
+    background-color:#5f5fff;text-align: center;width: 120px;color:white;border-radius: 5px; 
+    border:none;height: 35px;font-size: 12pt;margin-left: 20px;
+}
+
+.ComboBoxHoras
+{
+    border-radius: 10px;color:black;width:20px;
+}
+

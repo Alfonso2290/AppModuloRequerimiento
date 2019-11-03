@@ -9,6 +9,7 @@ import BEAN.DistritoBEAN;
 import BEAN.ProductoBEAN;
 import BEAN.ProveedorBEAN;
 import BEAN.ProvinciaBEAN;
+import BEAN.UsuarioBEAN;
 import DAO.CatalogoDAO;
 import DAO.CotizacionDAO;
 import DAO.DepartamentoDAO;
@@ -17,6 +18,7 @@ import DAO.DistritoDAO;
 import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import DAO.ProvinciaDAO;
+import DAO.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -255,7 +257,7 @@ public class RequerimientoServlet extends HttpServlet
             }
             case 6:
             {
-                pagina="/index.jsp";
+                pagina="/GestionMenus/MenuPrincipalAsistentePedido.jsp";
                 break;
             }
             case 7:
@@ -2794,7 +2796,69 @@ public class RequerimientoServlet extends HttpServlet
                 pagina="/GestionCotizacion/frmCotizaciones.jsp";
                 break;
             }
-            
+            case 45:{
+                
+                pagina="/index.jsp";
+                break;
+            }
+            case 46:{
+                
+                pagina="/GestionUsuarios/frmRegistrarUsuario.jsp";
+                break;
+            }
+            case 47:{
+                
+                String tipo=request.getParameter("cbTipo");
+                String usu=request.getParameter("txtUsu");
+                String pas=request.getParameter("txtPas");
+                
+                UsuarioBEAN usuario=new UsuarioBEAN();
+                usuario.setTipoUsuario(tipo);
+                usuario.setNombreUsuario(usu);
+                usuario.setClave(pas);
+                
+                UsuarioDAO dao=new UsuarioDAO();
+                int verificarNombreUsuario=dao.verificarNombreUsuario(usu);
+                String mensaje;
+                
+                if(verificarNombreUsuario==0){
+                   dao.registrarUsuario(usuario);
+                   mensaje="Se ha registrado con éxito al usuario";
+                }else{
+                    
+                    mensaje="El Usuario ingresado ya se encuentra registrado";
+                }
+                request.setAttribute("MENSAJE", mensaje);
+                pagina="/GestionUsuarios/frmRegistrarUsuario.jsp";
+                break;
+            }
+            case 48:{
+                
+                String tipo=request.getParameter("cbTipo");
+                String usu=request.getParameter("txtUsu");
+                String pas=request.getParameter("txtPas");
+                
+                UsuarioBEAN usuario=new UsuarioBEAN();
+                usuario.setTipoUsuario(tipo);
+                usuario.setNombreUsuario(usu);
+                usuario.setClave(pas);
+                
+                UsuarioDAO dao=new UsuarioDAO();
+                int verificarUsuario=dao.verificarCuentaUsuario(usuario);
+                String mensaje;
+                
+                if(verificarUsuario==0){
+                   mensaje="El Usuario no se encuentra registrado ";
+                   request.setAttribute("MENSAJE", mensaje);
+                   pagina="/index.jsp";
+                }else{
+                   
+                    pagina="/GestionMenus/MenuPrincipalAsistentePedido.jsp";
+                }
+                
+                
+                break;
+            }
         }
         
         getServletContext().getRequestDispatcher(pagina).forward(request, response);

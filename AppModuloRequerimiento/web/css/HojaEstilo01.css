@@ -1,0 +1,216 @@
+.TextboxRegistroNotas
+{
+    width: 200px;border:none;
+}
+.ComboBoxConfirmarCodigo
+{
+    border-radius: 5px; border: #5F5F5F 1px solid; width: 350px;font-size: 9pt;
+    height: 30px;color:#808080;
+}
+
+.DivPrincipal
+{
+    height: 650px;margin-top: 150px;border-radius: 10px; border: #5F5F5F 1px solid;width: 40%; 
+    background-color: #6495ED;
+}
+
+.DivPrincipalCambiarContra
+{
+    height: 350px;margin-top: 150px; width: 40%;
+}
+
+
+.DivPrincipal2
+{
+    height: 300px;margin-top: 100px;border-radius: 10px; border: #5F5F5F 1px solid;width: 40%; 
+    background-color: beige;
+}
+
+.CabeceraTabla
+{
+    text-align: center;color:black;font-size: 14pt;
+}
+
+.CabeceraTabla2 /* quiza no sirva*/
+{
+    background-color:#AAC9E8;text-align: center;color:white;font-size: 20pt;
+}
+
+.TablaPrincipal
+{
+    height: 250px;width: 90%; border: none;
+}
+.TablaPrincipalCambiarContra
+{
+    height: 200px;width: 90%
+}
+
+
+.DivPrincipalRegistroNotas
+{
+    height: 350px;margin-top: 150px; border: none;width: 90%; 
+    
+}
+
+.TablaPrincipalRegistroNotas
+{
+    height: 60px;width: 100%; 
+}
+
+.CabeceraTablaRegistroNotas
+{
+    background-color:#6495ED;text-align: center;color:white;font-size: 20pt;height: 100px;
+}
+
+.TablaPrincipalRegistroNotas02
+{
+    width: 95%;border: black 1px solid;border-left-width: thin;
+}
+
+.DivPrincipalRegistroNotas02
+{
+    width: 100%; 
+    clear: both;
+}
+
+.TablaPrincipalRegistroNotas03
+{
+    width: 30%; border: #6495ED;
+}
+
+.TablaPrincipal2
+{
+    height: 120px;width: 100%;border: none;
+}
+
+.Textbox
+{
+    border-radius: 5px; border: #5F5F5F 1px solid; width: 300px;font-size: 9pt;
+    height: 30px;color:black;
+}
+
+.TextboxConfirmarCodigo
+{
+    border-radius: 5px; border: #5F5F5F 1px solid; width: 350px;font-size: 9pt;
+    height: 30px;color:black;
+}
+
+.botonInicioSesion
+{
+    background-color:#5f5fff;text-align: center;width: 160px;color:white;border-radius: 5px; 
+    border:none;height: 35px;font-size: 12pt;
+}
+
+.Hipervinculo
+{
+    margin-left: 10px;font-size: 14pt;color:white;
+}
+
+.Columna1
+{
+    margin-left: 50px;font-size: 12pt;
+}
+
+.ColumnaSalirRegistro
+{
+    color:white;font-size: 14pt;
+}
+
+.Imagenes
+{
+    margin-left: -15px;
+}
+
+.DivPrincipalMantenimiento003
+{
+    margin-top: 150px; border: none;width: 50%; 
+    
+}
+
+.DivPrincipalMantenimiento
+{
+    margin-top: 150px; border: none;width: 90%;  
+}
+
+.DivPrincipalMantenimientoRegistrar
+{
+    margin-top: 150px; border: none;width: 50%; 
+    
+}
+
+
+.TablaPrincipalMantenimiento
+{
+    width: 95%; border: black 1px solid;
+}
+
+.TablaPrincipalMantenimientoRegistrarUsuario
+{
+    width: 95%; border: none;margin-left: 90px;height: 500px;
+}
+
+.TablaPrincipalMantenimientoRegistrarPersonal
+{
+    width: 95%; border: none;margin-left: 90px;height: 750px;
+}
+
+.TablaPrincipalMantenimientoRegistrarAlumno
+{
+    width: 95%; border: none;margin-left: 90px;height: 900px;
+}
+
+.TablaPrincipalMantenimientoRegistrarDocente
+{
+    width: 95%; border: none;margin-left: 90px;height: 600px;
+}
+
+.TablaPrincipalMantenimientoRegistrarAula
+{
+    width: 95%; border: none;margin-left: 90px;height: 400px;
+}
+
+.TablaPrincipalMantenimientoRegistrarModulo
+{
+    width: 95%; border: none;margin-left: 90px;height: 150px;
+}
+
+.TablaPrincipalMantenimientoModificarUsuario
+{
+    width: 95%; border: none;margin-left: 90px;height: 550px;
+}
+
+.TablaPrincipalMantenimientoModificarPersonal
+{
+    width: 95%; border: none;margin-left: 50px;height: 800px;
+}
+
+.TablaPrincipalMantenimientoModificarAlumno
+{
+    width: 95%; border: none;margin-left: 90px;height: 650px;
+}
+
+.TablaPrincipalMantenimientoModificarDocente
+{
+    width: 95%; border: none;margin-left: 90px;height: 650px;
+}
+
+.TablaPrincipalMantenimientoModificarAula
+{
+    width: 95%; border: none;margin-left: 90px;height: 400px;
+}
+
+.TablaPrincipalMantenimiento2
+{
+    width: 100%;
+}
+
+.TablaPrincipalMantenimiento0002
+{
+    width: 100%;height: 150px;
+}
+
+.CabeceraMenus
+{
+    background-color: #AAC9E8;height: 50px;width: 100%;text-align: center;color:black;font-size: 20pt;
+}
+

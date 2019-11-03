@@ -1,0 +1,10 @@
+.notificacion {
+	position: fixed;
+	opacity:0.8;
+	background-color: #202020;
+	left: auto;
+	width: 330px;
+	top: 0;
+	bottom: 0;
+	right: 0; 
+}
