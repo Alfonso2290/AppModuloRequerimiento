@@ -55,6 +55,17 @@
 <html>
     <head>
         <title>Agregar Producto</title>
+        <link href="<%=request.getContextPath()%>/css/HojaEstilo01.css" rel="stylesheet" type="text/css">
+        <link href="<%=request.getContextPath()%>/css/bootstrap.min2.css" rel="stylesheet"> 
+        <link href="<%=request.getContextPath()%>/css/modern-business.css" rel="stylesheet">   
+        <link href="<%=request.getContextPath()%>/css/style2.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="<%=request.getContextPath()%>/js/jquery_3.js"></script>
+        <script src="<%=request.getContextPath()%>/js/bootstrap.min5.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jssor.slider-22.0.15.mini.js" type="text/javascript" data-library="jssor.slider.mini" data-version="22.0.15"></script>
+        <script src="<%=request.getContextPath()%>/js/responsiveslides.min.js"></script>   
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.flexisel.js"></script>
+        <script src="<%=request.getContextPath()%>/js/javascript.js" type="text/javascript"></script>
+        <script src="<%=request.getContextPath()%>/javascript/Metodo.js" type="text/javascript"></script>
         <script>
             function focoCodProd()
             {
@@ -154,143 +165,149 @@
             
             <input type="hidden" name="codprod" value="<%=codprod%>">
             <input type="hidden" name="numcat" value="<%=numcat%>">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">  
+               <%@include file="../PlantillasMenus/PlantifillaMenuAsistentePedido.jsp" %>
+               <div class="CabeceraMenus">Modificar Producto</div>
+            </nav>
             <center>
-                <table border="4" cellpadding="5">
-                    <tr>
-                        <td colspan="2">Modificar Producto</td>
-                    </tr>
-                    <tr>
-                        <td>Código Producto:</td>
-                        <td><%=codprod%></td>
-                    </tr>
-                    <tr>
-                        <td>Nombre Producto:</td>
-                        <td><input type="text" name="txtNom" value="<%=objProd.getNomProducto()%>" disabled></td>
-                    </tr>
-                    <tr>
-                        <td>Unidad:</td>
-                        <td>
-                            <%
-                                if(request.getAttribute("objetodetalle")!=null)
-                                {
-   
-                                    if(objProd.getUnidadMedida().compareTo("Kilogramo")==0)
+                <div class="DivPrincipalMantenimientoRegistrar">
+                    <br><br>
+                    <table border="4" cellpadding="5">
+
+                        <tr>
+                            <td>Código Producto:</td>
+                            <td><%=codprod%></td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Producto:</td>
+                            <td><input type="text" name="txtNom" value="<%=objProd.getNomProducto()%>" disabled></td>
+                        </tr>
+                        <tr>
+                            <td>Unidad:</td>
+                            <td>
+                                <%
+                                    if(request.getAttribute("objetodetalle")!=null)
                                     {
-                            %>
-                            <select name="cbUnidad">
-                               <option value="" >--Seleccionar--</option>
-                               <option value="Kilogramo" selected>Kilogramo</option>
-                               <option value="Metros">Metros</option>
-                               <option value="Metros cubicos">Metros cubicos</option>
-                            </select>
-                                <%
-                                    }else if(objProd.getUnidadMedida().compareTo("Metros")==0){
+
+                                        if(objProd.getUnidadMedida().compareTo("Kilogramo")==0)
+                                        {
                                 %>
-                            <select name="cbUnidad">
-                               <option value="" >--Seleccionar--</option>
-                               <option value="Kilogramo" >Kilogramo</option>
-                               <option value="Metros" selected>Metros</option>
-                               <option value="Metros cubicos">Metros cubicos</option>
-                            </select>
+                                <select name="cbUnidad">
+                                   <option value="" >--Seleccionar--</option>
+                                   <option value="Kilogramo" selected>Kilogramo</option>
+                                   <option value="Metros">Metros</option>
+                                   <option value="Metros cubicos">Metros cubicos</option>
+                                </select>
+                                    <%
+                                        }else if(objProd.getUnidadMedida().compareTo("Metros")==0){
+                                    %>
+                                <select name="cbUnidad">
+                                   <option value="" >--Seleccionar--</option>
+                                   <option value="Kilogramo" >Kilogramo</option>
+                                   <option value="Metros" selected>Metros</option>
+                                   <option value="Metros cubicos">Metros cubicos</option>
+                                </select>
+                                    <%
+                                        }else if(objProd.getUnidadMedida().compareTo("Metros cubicos")==0){
+
+
+                                %>
+                                <select name="cbUnidad">
+                                   <option value="" >--Seleccionar--</option>
+                                   <option value="Kilogramo" >Kilogramo</option>
+                                   <option value="Metros" >Metros</option>
+                                   <option value="Metros cubicos" selected>Metros cubicos</option>
+                                </select>
+
+
                                 <%
-                                    }else if(objProd.getUnidadMedida().compareTo("Metros cubicos")==0){
- 
-                                
-                            %>
-                            <select name="cbUnidad">
-                               <option value="" >--Seleccionar--</option>
-                               <option value="Kilogramo" >Kilogramo</option>
-                               <option value="Metros" >Metros</option>
-                               <option value="Metros cubicos" selected>Metros cubicos</option>
-                            </select>
-                            
-                            
-                            <%
-                                    }else{
-                                
-                            %>
-                            <select name="cbUnidad">
-                               <option value="" selected>--Seleccionar--</option>
-                               <option value="Kilogramo">Kilogramo</option>
-                               <option value="Metros">Metros</option>
-                               <option value="Metros cubicos">Metros cubicos</option>
-                            </select>
-                            <%
+                                        }else{
+
+                                %>
+                                <select name="cbUnidad">
+                                   <option value="" selected>--Seleccionar--</option>
+                                   <option value="Kilogramo">Kilogramo</option>
+                                   <option value="Metros">Metros</option>
+                                   <option value="Metros cubicos">Metros cubicos</option>
+                                </select>
+                                <%
+                                        }
+                                    }else {
+                                %>
+
+                                <select name="cbUnidad">
+                                   <option value="" selected>--Seleccionar--</option>
+                                   <option value="Kilogramo">Kilogramo</option>
+                                   <option value="Metros">Metros</option>
+                                   <option value="Metros cubicos">Metros cubicos</option>
+                                </select>
+
+                                <%
                                     }
-                                }else {
-                            %>
-                            
-                            <select name="cbUnidad">
-                               <option value="" selected>--Seleccionar--</option>
-                               <option value="Kilogramo">Kilogramo</option>
-                               <option value="Metros">Metros</option>
-                               <option value="Metros cubicos">Metros cubicos</option>
-                            </select>
-                            
-                            <%
-                                }
-                            %>
-                     
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cantidad:</td>
-                        <td>
-                            <%
-                                if(request.getAttribute("objetodetalle")!=null){
-                                   
-                            %>
-                            
-                            <input type="text" name="txtCantidad" value="<%=objProd.getCantidad()%>" onkeypress="return soloNumeros(event)">
-                            <%
-                                }else{
-                            %>
-                            <input type="text" name="txtCantidad" onkeypress="return soloNumeros(event)">
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Precio Unitario:</td>
-                        <td>S/.
-                            <%
-                                if(request.getAttribute("objetodetalle")!=null){
-                                   
-                            %>
-                            
-                            <input type="text" name="txtPrecio" value="<%=objProd.getPrecioUnitario()%>" onkeypress="return soloNumeros(event)">
-                            <%
-                                }else{
-                            %>
-                            <input type="text" name="txtPrecio" onkeypress="return soloNumeros(event)">
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button type="button" onclick="modificar()">
-                                Modificar
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" onclick="cancelar()">
-                                Cancelar
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <center>
-                                <button type="button" onclick="retornar()">
-                                    Retornar
+                                %>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cantidad:</td>
+                            <td>
+                                <%
+                                    if(request.getAttribute("objetodetalle")!=null){
+
+                                %>
+
+                                <input type="text" name="txtCantidad" value="<%=objProd.getCantidad()%>" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }else{
+                                %>
+                                <input type="text" name="txtCantidad" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precio Unitario:</td>
+                            <td>S/.
+                                <%
+                                    if(request.getAttribute("objetodetalle")!=null){
+
+                                %>
+
+                                <input type="text" name="txtPrecio" value="<%=objProd.getPrecioUnitario()%>" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }else{
+                                %>
+                                <input type="text" name="txtPrecio" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" onclick="modificar()">
+                                    Modificar
                                 </button>
-                            </center>
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                            <td>
+                                <button type="button" onclick="cancelar()">
+                                    Cancelar
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <center>
+                                    <button type="button" onclick="retornar()">
+                                        Retornar
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br><br><br><br>
             </center>
         </form>
     </body>

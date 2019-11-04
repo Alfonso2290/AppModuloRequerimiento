@@ -72,6 +72,17 @@
 <html>
     <head>
         <title>Agregar Cotización</title>
+        <link href="<%=request.getContextPath()%>/css/HojaEstilo01.css" rel="stylesheet" type="text/css">
+        <link href="<%=request.getContextPath()%>/css/bootstrap.min2.css" rel="stylesheet"> 
+        <link href="<%=request.getContextPath()%>/css/modern-business.css" rel="stylesheet">   
+        <link href="<%=request.getContextPath()%>/css/style2.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="<%=request.getContextPath()%>/js/jquery_3.js"></script>
+        <script src="<%=request.getContextPath()%>/js/bootstrap.min5.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jssor.slider-22.0.15.mini.js" type="text/javascript" data-library="jssor.slider.mini" data-version="22.0.15"></script>
+        <script src="<%=request.getContextPath()%>/js/responsiveslides.min.js"></script>   
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.flexisel.js"></script>
+        <script src="<%=request.getContextPath()%>/js/javascript.js" type="text/javascript"></script>
+        <script src="<%=request.getContextPath()%>/javascript/Metodo.js" type="text/javascript"></script>
         <script>
             function foco()
             {
@@ -594,815 +605,823 @@
             <input type="hidden" name="codprov" value="<%=codprov%>">
             <input type="hidden" name="codcot" value="<%=codcot%>">
             <input type="hidden" name="est" value="<%=est%>">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">  
+               <%@include file="../PlantillasMenus/PlantifillaMenuAsistentePedido.jsp" %>
+               <div class="CabeceraMenus">Nueva Cotización</div>
+            </nav>
             <center>
-                <table border="4" cellpadding="5">
-                    <tr>
-                        <td colspan="4"><center>Registro de Proveedor</center></td>
-                    </tr>
-                    <tr>
-                        <td>Código de Proveedor:</td>
-                        <td>
-                            <%
-                                if(request.getAttribute("listaproveedor")!=null){
-                            %>
-                            
-                            <%
-                                if(request.getAttribute("objeto")!=null){  
-                            %>
-                            <select name="cbProveedor" disabled>
-                                
-                                <option value="<%=codprov%>" selected><%=nomprov%></option>
-                                
-                            </select>
-                            <button type="button" onclick="cerrar()">
-                                X
-                            </button>
-
-                            <%
-                                }
-                                else if(request.getAttribute("codprov")!=null){
-                            %>
-                            
-                            <select name="cbProveedor" onchange="llenarCampos()">
-                                <option value="">--Seleccionar--</option>
+                <div class="DivPrincipalMantenimientoRegistrar">
+                <br><br>
+                    <table border="4" cellpadding="5">
+                        <tr>
+                            <td colspan="4"><center>Registro de Proveedor</center></td>
+                        </tr>
+                        <tr>
+                            <td>Código de Proveedor:</td>
+                            <td>
                                 <%
-                                    for(ProveedorBEAN prov:listaprov)
-                                    {
-                                        if(((String)request.getAttribute("codprov")).compareTo(prov.getCodProveedor())==0)
-                                        {
-                                %>
-                                
-                                <option value="<%=prov.getCodProveedor()%>" selected><%=prov.getNombre()%></option>
-                                
-                                <%
-                                        }
-                                        else{
-                                    
-                                %>
-                                
-                                <option value="<%=prov.getCodProveedor()%>"><%=prov.getNombre()%></option>
-                                
-                                <%
-                                        }
-                                    }
-                                %>
-                            
-                            </select>
-                            <button type="button" onclick="cerrar()">
-                                X
-                            </button>
-                            
-                            <%
-                                }else{
-                            %>
-                            
-                            <select name="cbProveedor" onchange="llenarCampos()">
-                                <option value="" selected>--Seleccionar--</option>
-                                <%
-                                    for(ProveedorBEAN prov:listaprov)
-                                    {
-                                %>
-                                
-                                <option value="<%=prov.getCodProveedor()%>"><%=prov.getNombre()%></option>
-                                
-                                <%
-                                    }
-                                %>
-                            </select>
-                            <button type="button" onclick="cerrar()">
-                                X
-                            </button>
-                            <%
-                                }
-                            %>
-                            
-                            <%
-                                }else{
-                            %>
-                            <%
-                                if(request.getAttribute("codprov")!=null){   
-                            %>
-                            
-                            <%=request.getAttribute("codprov")%>
-                            
-                            <%
-                                if(request.getAttribute("objeto")!=null){
-                            %>
-                            <button type="button" onclick="Busqueda()" disabled>
-                                Buscar
-                            </button>
-                            <%
-                                }else{
-                            %>
-                            <button type="button" onclick="Busqueda()">
-                                Buscar
-                            </button>
-                            <%
-                                }
-                            %>
-                            
-                            <%
-                                    }
-                                }
-                            %>
-                        </td>
-                        <td>Departamento</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <select name="cbDepartamento" onchange="listarProvincias()" disabled>
-                                <option value="<%=objProv.getCodDepartamento()%>"><%=objProv.getNomDepartamento()%></option>
-                            </select>
-                            
-                            <%
-                                }else{
-                            %>
-                            <select name="cbDepartamento" onchange="listarProvincias()" disabled>
-                                <option value=0>--Seleccionar--</option>
-                            </select>
-                            <%
-                                }
-                               }else if(request.getAttribute("objeto")!=null){
-                            %>
-                            <select name="cbDepartamento" onchange="listarProvincias()" disabled>
-                                
-                                <%
-                                    if(request.getAttribute("coddep")!=null)
-                                    {
-                                        
-                                %>
-                                        <option value=0>--Seleccionar--</option>
-                                <%
-                                    if(request.getAttribute("listadepartamentos")!=null)
-                                    for(DepartamentoBEAN obj:listadep){
+                                    if(request.getAttribute("listaproveedor")!=null){
                                 %>
 
                                 <%
-                                    if(obj.getCodDepartamento()==coddep)
-                                    {
-
+                                    if(request.getAttribute("objeto")!=null){  
                                 %>
+                                <select name="cbProveedor" disabled>
 
-                                <option value="<%=obj.getCodDepartamento()%>" selected><%=obj.getNombre()%></option>
+                                    <option value="<%=codprov%>" selected><%=nomprov%></option>
 
-                                <%
-                                    }
-                                    else
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodDepartamento()%>"><%=obj.getNombre()%></option>
-                                <%
-                                    }
-                                   }
-
-                                %>
-
-                                <%
-                                    }
-                                    else
-                                    {
-                                %>
-
-                                    <option value=0 selected>--Seleccionar--</option>
-
-                                <%
-                                    if(request.getAttribute("listadepartamentos")!=null)
-                                    for(DepartamentoBEAN obj:listadep){
-                                %>
-
-                                <option value="<%=obj.getCodDepartamento()%>"><%=obj.getNombre()%></option>
-
-                                <%
-                                      }
-                                    }
-                                %>
-
-                            </select>
-                                
-                            
-                            <%
-                                }else{
-                            %>
-                            <select name="cbDepartamento" onchange="listarProvincias()">
-                                
-                                <%
-                                    if(request.getAttribute("coddep")!=null)
-                                    {
-                                        
-                                %>
-                                        <option value=0>--Seleccionar--</option>
-                                <%
-                                    if(request.getAttribute("listadepartamentos")!=null)
-                                    for(DepartamentoBEAN obj:listadep){
-                                %>
-
-                                <%
-                                    if(obj.getCodDepartamento()==coddep)
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodDepartamento()%>" selected><%=obj.getNombre()%></option>
-
-                                <%
-                                    }
-                                    else
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodDepartamento()%>"><%=obj.getNombre()%></option>
-                                <%
-                                    }
-                                   }
-
-                                %>
-
-                                <%
-                                    }
-                                    else
-                                    {
-                                %>
-
-                                    <option value=0 selected>--Seleccionar--</option>
-
-                                <%
-                                    if(request.getAttribute("listadepartamentos")!=null)
-                                    for(DepartamentoBEAN obj:listadep){
-                                %>
-
-                                <option value="<%=obj.getCodDepartamento()%>"><%=obj.getNombre()%></option>
-
-                                <%
-                                      }
-                                    }
-                                %>
-
-                            </select>
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Nombre de Proveedor:</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <input type="text" name="txtNom" value="<%=objProv.getNombre()%>" disabled>
-                            <%
-                                }else{
-                            %>   
-                            <input type="text" name="txtNom" disabled>
-                            
-                            <%
-                                }
-                                }else if(request.getAttribute("objeto")!=null){
-                            %>
-                                <input type="text" name="txtNom" value="<%=prov.getNombre()%>" disabled>
-                            <%
-                                }else if(request.getAttribute("nom")!=null){
-                            %>
-                                <input type="text" name="txtNom" value="<%=nom%>" >
-                            <%
-                                }else{
-                            %>
-                            
-                            <input type="text" name="txtNom">
-                            
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td>Provincia:</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <select name="cbProvincia" onchange="listarDistritos()" disabled>
-                                <option value="<%=objProv.getCodProvincia()%>"><%=objProv.getNomProvincia()%></option>
-                            </select>
-                            
-                            <%
-                                }else{
-                            %>
-                            <select name="cbProvincia" onchange="listarDistritos()" disabled>
-                                <option value=0>--Seleccionar--</option>
-                            </select>
-                               
-          
-                            <%
-                                }
-                                }else if(request.getAttribute("objeto")!=null){
-                            %>
-                            <select name="cbProvincia" onchange="listarDistritos()" disabled>
-                                
-                                <%
-                                    if(request.getAttribute("codpro")!=null)
-                                    {
-                                        
-                                %>
-                                        <option value=0>--Seleccionar--</option>
-                                <%
-                                    if(request.getAttribute("listaprovincias")!=null)
-                                    for(ProvinciaBEAN obj:listapro){
-                                %>
-
-                                <%
-                                    if(obj.getCodProvincia()==codpro)
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodProvincia()%>" selected><%=obj.getNombre()%></option>
-
-                                <%
-                                    }
-                                    else
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodProvincia()%>"><%=obj.getNombre()%></option>
-                                <%
-                                    }
-                                   }
-
-                                %>
-
-                                <%
-                                    }
-                                    else
-                                    {
-                                %>
-
-                                    <option value=0 selected>--Seleccionar--</option>
-
-                                <%
-                                    if(request.getAttribute("listaprovincias")!=null)
-                                    for(ProvinciaBEAN obj:listapro){
-                                %>
-
-                                <option value="<%=obj.getCodProvincia()%>"><%=obj.getNombre()%></option>
-
-                                <%
-                                      }
-                                    }
-                                %>
-
-                            </select>
-                            <%
-                                }else{
-                            %>
-                            <select name="cbProvincia" onchange="listarDistritos()">
-                                
-                                <%
-                                    if(request.getAttribute("codpro")!=null)
-                                    {
-                                        
-                                %>
-                                        <option value=0>--Seleccionar--</option>
-                                <%
-                                    if(request.getAttribute("listaprovincias")!=null)
-                                    for(ProvinciaBEAN obj:listapro){
-                                %>
-
-                                <%
-                                    if(obj.getCodProvincia()==codpro)
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodProvincia()%>" selected><%=obj.getNombre()%></option>
-
-                                <%
-                                    }
-                                    else
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodProvincia()%>"><%=obj.getNombre()%></option>
-                                <%
-                                    }
-                                   }
-
-                                %>
-
-                                <%
-                                    }
-                                    else
-                                    {
-                                %>
-
-                                    <option value=0 selected>--Seleccionar--</option>
-
-                                <%
-                                    if(request.getAttribute("listaprovincias")!=null)
-                                    for(ProvinciaBEAN obj:listapro){
-                                %>
-
-                                <option value="<%=obj.getCodProvincia()%>"><%=obj.getNombre()%></option>
-
-                                <%
-                                      }
-                                    }
-                                %>
-
-                            </select>
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>RUC</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <input name="txtRuc" type="text" value="<%=objProv.getRuc()%>" disabled>
-                            <%
-                                }else{
-                            %>
-                            <input type="text" name="txtRuc" disabled>
-                            <%
-                                }
-                                }else if(request.getAttribute("objeto")!=null){
-                            %>
-                                <input type="text" name="txtRuc" value="<%=prov.getRuc()%>" disabled>
-                            <%
-                                }else if(request.getAttribute("ruc")!=null){
-                            %>
-                            <input type="text" name="txtRuc" value="<%=ruc%>" onkeypress="return soloNumeros(event)" maxlength="11">
-                                
-                            <%
-                                }else{
-                            %>
-                            
-                            <input type="text" name="txtRuc" onkeypress="return soloNumeros(event)" maxlength="11">
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td>
-                            Distrito:
-                        </td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <select name="cbDistrito" disabled>
-                                <option value="<%=objProv.getCodDistrito()%>"><%=objProv.getNomDistrito()%></option>
-                            </select>
-                            
-                            <%
-                                }else{
-                            %>
-                            <select name="cbDistrito" disabled>
-                                <option value=0>--Seleccionar--</option>
-                            </select>
-                            <%
-                                }
-                              }else  if(request.getAttribute("objeto")!=null){
-                            %>
-                            <select name="cbDistrito" disabled>
-                                
-                                <%
-                                    if(request.getAttribute("coddis")!=null)
-                                    {
-                                        
-                                %>
-                                        <option value=0>--Seleccionar--</option>
-                                <%
-                                    if(request.getAttribute("listadistritos")!=null)
-                                    for(DistritoBEAN obj:listadis){
-                                %>
-
-                                <%
-                                    if(obj.getCodDistrito()==coddis)
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodDistrito()%>" selected><%=obj.getNombre()%></option>
-
-                                <%
-                                    }
-                                    else
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodDistrito()%>"><%=obj.getNombre()%></option>
-                                <%
-                                    }
-                                   }
-
-                                %>
-
-                                <%
-                                    }
-                                    else
-                                    {
-                                %>
-
-                                    <option value=0 selected>--Seleccionar--</option>
-
-                                <%
-                                    if(request.getAttribute("listadistritos")!=null)
-                                    for(DistritoBEAN obj:listadis){
-                                %>
-
-                                <option value="<%=obj.getCodDistrito()%>"><%=obj.getNombre()%></option>
-
-                                <%
-                                      }
-                                    }
-                                %>
-
-                            </select>
-                            <%
-                                }else{
-                            %>
-                            <select name="cbDistrito">
-                                
-                                <%
-                                    if(request.getAttribute("coddis")!=null)
-                                    {
-                                        
-                                %>
-                                        <option value=0>--Seleccionar--</option>
-                                <%
-                                    if(request.getAttribute("listadistritos")!=null)
-                                    for(DistritoBEAN obj:listadis){
-                                %>
-
-                                <%
-                                    if(obj.getCodDistrito()==coddis)
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodDistrito()%>" selected><%=obj.getNombre()%></option>
-
-                                <%
-                                    }
-                                    else
-                                    {
-
-                                %>
-
-                                <option value="<%=obj.getCodDistrito()%>"><%=obj.getNombre()%></option>
-                                <%
-                                    }
-                                   }
-
-                                %>
-
-                                <%
-                                    }
-                                    else
-                                    {
-                                %>
-
-                                    <option value=0 selected>--Seleccionar--</option>
-
-                                <%
-                                    if(request.getAttribute("listadistritos")!=null)
-                                    for(DistritoBEAN obj:listadis){
-                                %>
-
-                                <option value="<%=obj.getCodDistrito()%>"><%=obj.getNombre()%></option>
-
-                                <%
-                                      }
-                                    }
-                                %>
-
-                            </select>
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <input name="txtEmail" type="email" value="<%=objProv.getEmail()%>" disabled>
-                            <%
-                                }else{
-                            %>
-                            
-                            <input type="email" name="txtEmail" disabled>
-                            
-                            <%
-                                }
-                                }else if(request.getAttribute("objeto")!=null){
-                            %>
-                            <input type="email" name="txtEmail" value="<%=prov.getEmail()%>" disabled>
-                            <%
-                                }else if(request.getAttribute("email")!=null){
-                            %>
-                            
-                            <input type="email" name="txtEmail" value="<%=email%>">
-                            <%
-                                }else{
-                            %>
-                            <input type="email" name="txtEmail">
-                            <%
-                                }
-                            %>
-                            
-                        </td>
-                        <td>Calle:</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <input name="txtCalle" type="text" value="<%=objProv.getCalle()%>" disabled>
-                            <%
-                                }else{
-                            %>
-                            <input type="text" name="txtCalle" disabled>
-                            <%
-                                }
-                              }else  if(request.getAttribute("objeto")!=null){
-                            %>
-                            <input type="text" name="txtCalle" value="<%=prov.getCalle()%>" disabled>
-                            <%
-                                }else if(request.getAttribute("calle")!=null){
-                            %>
-                            <input type="text" name="txtCalle" value="<%=calle%>">
-                            <%
-                                }else{
-                            %>
-                            <input type="text" name="txtCalle">
-                            <%
-                                }
-                            %>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Teléfono:</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <input name="txtTel" type="text" value="<%=objProv.getTelefono()%>" disabled>
-                            <%
-                                }else{
-                            %>
-                            <input type="tel" name="txtTel" disabled>
-                            <%
-                                }
-                              }else  if(request.getAttribute("objeto")!=null){
-                            %>
-                            <input type="tel" name="txtTel" value="<%=prov.getTelefono()%>" disabled>
-                            <%
-                                }else if(request.getAttribute("tel")!=null){
-                            %>
-                            <input type="tel" name="txtTel" value="<%=tel%>" onkeypress="return soloNumeros(event)">
-                            <%
-                                }else{
-                            %>
-                            <input type="tel" name="txtTel" onkeypress="return soloNumeros(event)">
-                            <%
-                                }
-                            %> 
-                        </td>
-                        <td>Número Externo:</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <input name="txtNumExt" type="text" value="<%=objProv.getNumExterno()%>" disabled>
-                            <%
-                                }else{
-                            %>
-                            <input type="text" name="txtNumExt" disabled>
-                            <%
-                                }
-                                }else  if(request.getAttribute("objeto")!=null){
-                            %>
-                            <input type="text" name="txtNumExt" value="<%=prov.getNumExterno()%>" disabled>
-                            <%
-                                }else if(request.getAttribute("nume")!=null){
-                            %>
-                            <input type="text" name="txtNumExt" value="<%=nume%>" onkeypress="return soloNumeros(event)">
-                            <%
-                                }else{
-                            %>
-                            <input type="text" name="txtNumExt" onkeypress="return soloNumeros(event)">
-                            <%
-                                }
-                            %> 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"></td>
-                        <td>Número Interno:</td>
-                        <td>
-                            <%if(request.getAttribute("listaproveedor")!=null){
-                                if(request.getAttribute("objetoProv")!=null){
-                            %>
-                            <input name="txtNumInt" type="text" value="<%=objProv.getNumInterno()%>" disabled>
-                            <%
-                                }else{
-                            %>
-                            
-                            <input type="text" name="txtNumInt" disabled>
-                            <%
-                                }
-                              }else  if(request.getAttribute("objeto")!=null){
-                            %>
-                            <input type="text" name="txtNumInt" value="<%=prov.getNumInterno()%>" disabled>
-                            
-                            <%
-                                }else if(request.getAttribute("numi")!=null){
-                            %>
-                            <input type="text" name="txtNumInt" value="<%=numi%>" onkeypress="return soloNumeros(event)">
-                            
-                            <%
-                                }else{
-                            %>
-                            <input type="text" name="txtNumInt" onkeypress="return soloNumeros(event)">
-                            <%
-                                }
-                            %> 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <%
-                                if(request.getAttribute("objeto")!=null || request.getAttribute("listaproveedor")!=null){
-                            %>
-                            <button type="button" onclick="guardar()" disabled>
-                                Guardar
-                            </button>
-                            <%
-                                }else{
-                            %>
-                            <button type="button" onclick="guardar()">
-                                Guardar
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td>
-                            <%
-                                if(request.getAttribute("objeto")!=null || request.getAttribute("listaproveedor")!=null){
-                            %>
-                            <button type="button" onclick="cancelar()" disabled>
-                                Cancelar
-                            </button>
-                            <%
-                                }else{
-                            %>
-                            
-                            <button type="button" onclick="cancelar()">
-                                Cancelar
-                            </button>
-                            <%
-                                }
-                            %>
-                        </td>
-                        <td>
-                            <%
-                                if(request.getAttribute("objeto")!=null || request.getAttribute("listaproveedor")!=null){
-                            %>
-                            <button type="button" onclick="detallar('oculto')" >
-                                Ir Cotización
-                            </button>
-                            <%
-                                }else{
-                            %>
-                            <button type="button" onclick="detallar('oculto')" disabled>
-                                Ir Cotización
-                            </button>
-                            <%
-                                }
-                            %> 
-                        </td>
-                        <td>
-                            <center>
-                                <button type="button" onclick="retornar()">
-                                    Retornar
+                                </select>
+                                <button type="button" onclick="cerrar()">
+                                    X
                                 </button>
-                            </center>
-                        </td>
-                    </tr>
-                </table>
-                <div id="oculto"></div>
-                <div id="oculto2"></div>
+
+                                <%
+                                    }
+                                    else if(request.getAttribute("codprov")!=null){
+                                %>
+
+                                <select name="cbProveedor" onchange="llenarCampos()">
+                                    <option value="">--Seleccionar--</option>
+                                    <%
+                                        for(ProveedorBEAN prov:listaprov)
+                                        {
+                                            if(((String)request.getAttribute("codprov")).compareTo(prov.getCodProveedor())==0)
+                                            {
+                                    %>
+
+                                    <option value="<%=prov.getCodProveedor()%>" selected><%=prov.getNombre()%></option>
+
+                                    <%
+                                            }
+                                            else{
+
+                                    %>
+
+                                    <option value="<%=prov.getCodProveedor()%>"><%=prov.getNombre()%></option>
+
+                                    <%
+                                            }
+                                        }
+                                    %>
+
+                                </select>
+                                <button type="button" onclick="cerrar()">
+                                    X
+                                </button>
+
+                                <%
+                                    }else{
+                                %>
+
+                                <select name="cbProveedor" onchange="llenarCampos()">
+                                    <option value="" selected>--Seleccionar--</option>
+                                    <%
+                                        for(ProveedorBEAN prov:listaprov)
+                                        {
+                                    %>
+
+                                    <option value="<%=prov.getCodProveedor()%>"><%=prov.getNombre()%></option>
+
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                                <button type="button" onclick="cerrar()">
+                                    X
+                                </button>
+                                <%
+                                    }
+                                %>
+
+                                <%
+                                    }else{
+                                %>
+                                <%
+                                    if(request.getAttribute("codprov")!=null){   
+                                %>
+
+                                <%=request.getAttribute("codprov")%>
+
+                                <%
+                                    if(request.getAttribute("objeto")!=null){
+                                %>
+                                <button type="button" onclick="Busqueda()" disabled>
+                                    Buscar
+                                </button>
+                                <%
+                                    }else{
+                                %>
+                                <button type="button" onclick="Busqueda()">
+                                    Buscar
+                                </button>
+                                <%
+                                    }
+                                %>
+
+                                <%
+                                        }
+                                    }
+                                %>
+                            </td>
+                            <td>Departamento</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <select name="cbDepartamento" onchange="listarProvincias()" disabled>
+                                    <option value="<%=objProv.getCodDepartamento()%>"><%=objProv.getNomDepartamento()%></option>
+                                </select>
+
+                                <%
+                                    }else{
+                                %>
+                                <select name="cbDepartamento" onchange="listarProvincias()" disabled>
+                                    <option value=0>--Seleccionar--</option>
+                                </select>
+                                <%
+                                    }
+                                   }else if(request.getAttribute("objeto")!=null){
+                                %>
+                                <select name="cbDepartamento" onchange="listarProvincias()" disabled>
+
+                                    <%
+                                        if(request.getAttribute("coddep")!=null)
+                                        {
+
+                                    %>
+                                            <option value=0>--Seleccionar--</option>
+                                    <%
+                                        if(request.getAttribute("listadepartamentos")!=null)
+                                        for(DepartamentoBEAN obj:listadep){
+                                    %>
+
+                                    <%
+                                        if(obj.getCodDepartamento()==coddep)
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodDepartamento()%>" selected><%=obj.getNombre()%></option>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodDepartamento()%>"><%=obj.getNombre()%></option>
+                                    <%
+                                        }
+                                       }
+
+                                    %>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+                                    %>
+
+                                        <option value=0 selected>--Seleccionar--</option>
+
+                                    <%
+                                        if(request.getAttribute("listadepartamentos")!=null)
+                                        for(DepartamentoBEAN obj:listadep){
+                                    %>
+
+                                    <option value="<%=obj.getCodDepartamento()%>"><%=obj.getNombre()%></option>
+
+                                    <%
+                                          }
+                                        }
+                                    %>
+
+                                </select>
+
+
+                                <%
+                                    }else{
+                                %>
+                                <select name="cbDepartamento" onchange="listarProvincias()">
+
+                                    <%
+                                        if(request.getAttribute("coddep")!=null)
+                                        {
+
+                                    %>
+                                            <option value=0>--Seleccionar--</option>
+                                    <%
+                                        if(request.getAttribute("listadepartamentos")!=null)
+                                        for(DepartamentoBEAN obj:listadep){
+                                    %>
+
+                                    <%
+                                        if(obj.getCodDepartamento()==coddep)
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodDepartamento()%>" selected><%=obj.getNombre()%></option>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodDepartamento()%>"><%=obj.getNombre()%></option>
+                                    <%
+                                        }
+                                       }
+
+                                    %>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+                                    %>
+
+                                        <option value=0 selected>--Seleccionar--</option>
+
+                                    <%
+                                        if(request.getAttribute("listadepartamentos")!=null)
+                                        for(DepartamentoBEAN obj:listadep){
+                                    %>
+
+                                    <option value="<%=obj.getCodDepartamento()%>"><%=obj.getNombre()%></option>
+
+                                    <%
+                                          }
+                                        }
+                                    %>
+
+                                </select>
+                                <%
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nombre de Proveedor:</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <input type="text" name="txtNom" value="<%=objProv.getNombre()%>" disabled>
+                                <%
+                                    }else{
+                                %>   
+                                <input type="text" name="txtNom" disabled>
+
+                                <%
+                                    }
+                                    }else if(request.getAttribute("objeto")!=null){
+                                %>
+                                    <input type="text" name="txtNom" value="<%=prov.getNombre()%>" disabled>
+                                <%
+                                    }else if(request.getAttribute("nom")!=null){
+                                %>
+                                    <input type="text" name="txtNom" value="<%=nom%>" >
+                                <%
+                                    }else{
+                                %>
+
+                                <input type="text" name="txtNom">
+
+                                <%
+                                    }
+                                %>
+                            </td>
+                            <td>Provincia:</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <select name="cbProvincia" onchange="listarDistritos()" disabled>
+                                    <option value="<%=objProv.getCodProvincia()%>"><%=objProv.getNomProvincia()%></option>
+                                </select>
+
+                                <%
+                                    }else{
+                                %>
+                                <select name="cbProvincia" onchange="listarDistritos()" disabled>
+                                    <option value=0>--Seleccionar--</option>
+                                </select>
+
+
+                                <%
+                                    }
+                                    }else if(request.getAttribute("objeto")!=null){
+                                %>
+                                <select name="cbProvincia" onchange="listarDistritos()" disabled>
+
+                                    <%
+                                        if(request.getAttribute("codpro")!=null)
+                                        {
+
+                                    %>
+                                            <option value=0>--Seleccionar--</option>
+                                    <%
+                                        if(request.getAttribute("listaprovincias")!=null)
+                                        for(ProvinciaBEAN obj:listapro){
+                                    %>
+
+                                    <%
+                                        if(obj.getCodProvincia()==codpro)
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodProvincia()%>" selected><%=obj.getNombre()%></option>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodProvincia()%>"><%=obj.getNombre()%></option>
+                                    <%
+                                        }
+                                       }
+
+                                    %>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+                                    %>
+
+                                        <option value=0 selected>--Seleccionar--</option>
+
+                                    <%
+                                        if(request.getAttribute("listaprovincias")!=null)
+                                        for(ProvinciaBEAN obj:listapro){
+                                    %>
+
+                                    <option value="<%=obj.getCodProvincia()%>"><%=obj.getNombre()%></option>
+
+                                    <%
+                                          }
+                                        }
+                                    %>
+
+                                </select>
+                                <%
+                                    }else{
+                                %>
+                                <select name="cbProvincia" onchange="listarDistritos()">
+
+                                    <%
+                                        if(request.getAttribute("codpro")!=null)
+                                        {
+
+                                    %>
+                                            <option value=0>--Seleccionar--</option>
+                                    <%
+                                        if(request.getAttribute("listaprovincias")!=null)
+                                        for(ProvinciaBEAN obj:listapro){
+                                    %>
+
+                                    <%
+                                        if(obj.getCodProvincia()==codpro)
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodProvincia()%>" selected><%=obj.getNombre()%></option>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodProvincia()%>"><%=obj.getNombre()%></option>
+                                    <%
+                                        }
+                                       }
+
+                                    %>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+                                    %>
+
+                                        <option value=0 selected>--Seleccionar--</option>
+
+                                    <%
+                                        if(request.getAttribute("listaprovincias")!=null)
+                                        for(ProvinciaBEAN obj:listapro){
+                                    %>
+
+                                    <option value="<%=obj.getCodProvincia()%>"><%=obj.getNombre()%></option>
+
+                                    <%
+                                          }
+                                        }
+                                    %>
+
+                                </select>
+                                <%
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RUC</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <input name="txtRuc" type="text" value="<%=objProv.getRuc()%>" disabled>
+                                <%
+                                    }else{
+                                %>
+                                <input type="text" name="txtRuc" disabled>
+                                <%
+                                    }
+                                    }else if(request.getAttribute("objeto")!=null){
+                                %>
+                                    <input type="text" name="txtRuc" value="<%=prov.getRuc()%>" disabled>
+                                <%
+                                    }else if(request.getAttribute("ruc")!=null){
+                                %>
+                                <input type="text" name="txtRuc" value="<%=ruc%>" onkeypress="return soloNumeros(event)" maxlength="11">
+
+                                <%
+                                    }else{
+                                %>
+
+                                <input type="text" name="txtRuc" onkeypress="return soloNumeros(event)" maxlength="11">
+                                <%
+                                    }
+                                %>
+                            </td>
+                            <td>
+                                Distrito:
+                            </td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <select name="cbDistrito" disabled>
+                                    <option value="<%=objProv.getCodDistrito()%>"><%=objProv.getNomDistrito()%></option>
+                                </select>
+
+                                <%
+                                    }else{
+                                %>
+                                <select name="cbDistrito" disabled>
+                                    <option value=0>--Seleccionar--</option>
+                                </select>
+                                <%
+                                    }
+                                  }else  if(request.getAttribute("objeto")!=null){
+                                %>
+                                <select name="cbDistrito" disabled>
+
+                                    <%
+                                        if(request.getAttribute("coddis")!=null)
+                                        {
+
+                                    %>
+                                            <option value=0>--Seleccionar--</option>
+                                    <%
+                                        if(request.getAttribute("listadistritos")!=null)
+                                        for(DistritoBEAN obj:listadis){
+                                    %>
+
+                                    <%
+                                        if(obj.getCodDistrito()==coddis)
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodDistrito()%>" selected><%=obj.getNombre()%></option>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodDistrito()%>"><%=obj.getNombre()%></option>
+                                    <%
+                                        }
+                                       }
+
+                                    %>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+                                    %>
+
+                                        <option value=0 selected>--Seleccionar--</option>
+
+                                    <%
+                                        if(request.getAttribute("listadistritos")!=null)
+                                        for(DistritoBEAN obj:listadis){
+                                    %>
+
+                                    <option value="<%=obj.getCodDistrito()%>"><%=obj.getNombre()%></option>
+
+                                    <%
+                                          }
+                                        }
+                                    %>
+
+                                </select>
+                                <%
+                                    }else{
+                                %>
+                                <select name="cbDistrito">
+
+                                    <%
+                                        if(request.getAttribute("coddis")!=null)
+                                        {
+
+                                    %>
+                                            <option value=0>--Seleccionar--</option>
+                                    <%
+                                        if(request.getAttribute("listadistritos")!=null)
+                                        for(DistritoBEAN obj:listadis){
+                                    %>
+
+                                    <%
+                                        if(obj.getCodDistrito()==coddis)
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodDistrito()%>" selected><%=obj.getNombre()%></option>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+
+                                    %>
+
+                                    <option value="<%=obj.getCodDistrito()%>"><%=obj.getNombre()%></option>
+                                    <%
+                                        }
+                                       }
+
+                                    %>
+
+                                    <%
+                                        }
+                                        else
+                                        {
+                                    %>
+
+                                        <option value=0 selected>--Seleccionar--</option>
+
+                                    <%
+                                        if(request.getAttribute("listadistritos")!=null)
+                                        for(DistritoBEAN obj:listadis){
+                                    %>
+
+                                    <option value="<%=obj.getCodDistrito()%>"><%=obj.getNombre()%></option>
+
+                                    <%
+                                          }
+                                        }
+                                    %>
+
+                                </select>
+                                <%
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <input name="txtEmail" type="email" value="<%=objProv.getEmail()%>" disabled>
+                                <%
+                                    }else{
+                                %>
+
+                                <input type="email" name="txtEmail" disabled>
+
+                                <%
+                                    }
+                                    }else if(request.getAttribute("objeto")!=null){
+                                %>
+                                <input type="email" name="txtEmail" value="<%=prov.getEmail()%>" disabled>
+                                <%
+                                    }else if(request.getAttribute("email")!=null){
+                                %>
+
+                                <input type="email" name="txtEmail" value="<%=email%>">
+                                <%
+                                    }else{
+                                %>
+                                <input type="email" name="txtEmail">
+                                <%
+                                    }
+                                %>
+
+                            </td>
+                            <td>Calle:</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <input name="txtCalle" type="text" value="<%=objProv.getCalle()%>" disabled>
+                                <%
+                                    }else{
+                                %>
+                                <input type="text" name="txtCalle" disabled>
+                                <%
+                                    }
+                                  }else  if(request.getAttribute("objeto")!=null){
+                                %>
+                                <input type="text" name="txtCalle" value="<%=prov.getCalle()%>" disabled>
+                                <%
+                                    }else if(request.getAttribute("calle")!=null){
+                                %>
+                                <input type="text" name="txtCalle" value="<%=calle%>">
+                                <%
+                                    }else{
+                                %>
+                                <input type="text" name="txtCalle">
+                                <%
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Teléfono:</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <input name="txtTel" type="text" value="<%=objProv.getTelefono()%>" disabled>
+                                <%
+                                    }else{
+                                %>
+                                <input type="tel" name="txtTel" disabled>
+                                <%
+                                    }
+                                  }else  if(request.getAttribute("objeto")!=null){
+                                %>
+                                <input type="tel" name="txtTel" value="<%=prov.getTelefono()%>" disabled>
+                                <%
+                                    }else if(request.getAttribute("tel")!=null){
+                                %>
+                                <input type="tel" name="txtTel" value="<%=tel%>" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }else{
+                                %>
+                                <input type="tel" name="txtTel" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }
+                                %> 
+                            </td>
+                            <td>Número Externo:</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <input name="txtNumExt" type="text" value="<%=objProv.getNumExterno()%>" disabled>
+                                <%
+                                    }else{
+                                %>
+                                <input type="text" name="txtNumExt" disabled>
+                                <%
+                                    }
+                                    }else  if(request.getAttribute("objeto")!=null){
+                                %>
+                                <input type="text" name="txtNumExt" value="<%=prov.getNumExterno()%>" disabled>
+                                <%
+                                    }else if(request.getAttribute("nume")!=null){
+                                %>
+                                <input type="text" name="txtNumExt" value="<%=nume%>" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }else{
+                                %>
+                                <input type="text" name="txtNumExt" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }
+                                %> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>Número Interno:</td>
+                            <td>
+                                <%if(request.getAttribute("listaproveedor")!=null){
+                                    if(request.getAttribute("objetoProv")!=null){
+                                %>
+                                <input name="txtNumInt" type="text" value="<%=objProv.getNumInterno()%>" disabled>
+                                <%
+                                    }else{
+                                %>
+
+                                <input type="text" name="txtNumInt" disabled>
+                                <%
+                                    }
+                                  }else  if(request.getAttribute("objeto")!=null){
+                                %>
+                                <input type="text" name="txtNumInt" value="<%=prov.getNumInterno()%>" disabled>
+
+                                <%
+                                    }else if(request.getAttribute("numi")!=null){
+                                %>
+                                <input type="text" name="txtNumInt" value="<%=numi%>" onkeypress="return soloNumeros(event)">
+
+                                <%
+                                    }else{
+                                %>
+                                <input type="text" name="txtNumInt" onkeypress="return soloNumeros(event)">
+                                <%
+                                    }
+                                %> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <%
+                                    if(request.getAttribute("objeto")!=null || request.getAttribute("listaproveedor")!=null){
+                                %>
+                                <button type="button" onclick="guardar()" disabled>
+                                    Guardar
+                                </button>
+                                <%
+                                    }else{
+                                %>
+                                <button type="button" onclick="guardar()">
+                                    Guardar
+                                </button>
+                                <%
+                                    }
+                                %>
+                            </td>
+                            <td>
+                                <%
+                                    if(request.getAttribute("objeto")!=null || request.getAttribute("listaproveedor")!=null){
+                                %>
+                                <button type="button" onclick="cancelar()" disabled>
+                                    Cancelar
+                                </button>
+                                <%
+                                    }else{
+                                %>
+
+                                <button type="button" onclick="cancelar()">
+                                    Cancelar
+                                </button>
+                                <%
+                                    }
+                                %>
+                            </td>
+                            <td>
+                                <%
+                                    if(request.getAttribute("objeto")!=null || request.getAttribute("listaproveedor")!=null){
+                                %>
+                                <button type="button" onclick="detallar('oculto')" >
+                                    Ir Cotización
+                                </button>
+                                <%
+                                    }else{
+                                %>
+                                <button type="button" onclick="detallar('oculto')" disabled>
+                                    Ir Cotización
+                                </button>
+                                <%
+                                    }
+                                %> 
+                            </td>
+                            <td>
+                                <center>
+                                    <button type="button" onclick="retornar()">
+                                        Retornar
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="oculto"></div>
+                    <div id="oculto2"></div>
+                </div>
+                <br><br><br><br>
             </center>
         </form>
     </body>
