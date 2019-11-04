@@ -124,6 +124,7 @@
     </head>
     <body>
         <form name="form">
+            
             <input type="hidden" name="op">
             <input type="hidden" name="sel">
             <input type="hidden" name="codcotizacion">
@@ -192,7 +193,7 @@
                         </table>
 
                         <div class="form-group">
-                            <select name="estado" id="maxRows" class="form-control" style="width: 150px;margin-left:-975px;">
+                            <select name="estadoOpc" id="maxRows" class="form-control" style="width: 150px;margin-left:-975px;">
                                 <option value="5000">Nº Registros</option>
                                 <option value="5">5</option>
                                 <option value="10">10</option>
